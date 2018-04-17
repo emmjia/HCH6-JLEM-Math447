@@ -146,6 +146,11 @@ Our linear regression reveals that both treatments are statistically significant
 and plot the residuals versus the predicted vibration
 level. Interpret these plots.}
 
+```{r}
+router.aov = aov(Vibes ~ coded(A) * coded(B), router.long)
+qqnorm(router.aov, full=T)
+```
+
 \textbf{(c) Draw the AB interaction plot. Interpret this plot. What
 levels of bit size and speed would you recommend for
 routine operation?}
@@ -165,6 +170,8 @@ from replicate I. In addition, he ran four center points and
 obtained the following response values: 36, 40, 43, 45.}
 
 \textbf{(a) Estimate the factor effects. Which effects are large?}
+
+
 
 \textbf{(b) Perform an analysis of variance, including a check for
 pure quadratic curvature. What are your conclusions?}
