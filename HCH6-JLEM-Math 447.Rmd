@@ -32,8 +32,20 @@ summary(cutting.speed.lm)
 \textbf{(b) Use the analysis of variance to confirm your conclusions
 for part (a).}
 
+```{r}
+#aova
+cutting.speed.aov=aov(yield ~ factorA * factorB * factorC, cutting.speed.long)
+summary(cutting.speed.aov)
+mse=summary(cutting.speed.aov)[[1]][8,3]
+mse
+```
+
+
 \textbf{(c) Write down a regression model for predicting tool life
 (in hours) based on the results of this experiment.}
+
+$$y = \beta_0 + \beta_1 X_1 + \beta_2 + X_2 + \beta_3 + X_3 + \beta_{1,3} X_1 X_3$$
+
 
 \textbf{(d) Analyze the residuals. Are there any obvious problems?}
 
@@ -47,6 +59,7 @@ would you recommend using?}
 approximate 95 percent confidence limits for the factor effects
 in Problem 6.1. Do the results of this analysis agree with the
 conclusions from the analysis of variance?}
+
 
 ##6.5
 
