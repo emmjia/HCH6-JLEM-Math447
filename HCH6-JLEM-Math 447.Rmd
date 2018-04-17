@@ -26,6 +26,12 @@ yield = c(22,32,35,55,44,40,60,39,31,43,34,47,45,37,50,41,25,29,50,46,38,36,54,4
 
 cutting.speed.long = data.frame(factorA, factorB, factorC, Rep, yield)
 
+# defining coded
+coded=function(x) #a function to code variable x
+{
+  ifelse(x=="+", 1, -1)
+}
+
 # linear regression
 cutting.speed.lm=lm(yield ~ coded(factorA) * coded(factorB) * coded(factorC), cutting.speed.long)
 summary(cutting.speed.lm)
@@ -67,6 +73,7 @@ We take a look at our normality plot and can state that normality is good. We ta
 plots, what coded factor levels of A, B, and C
 would you recommend using?}
 
+Because the coefficient for factorB is positive, cutting angle should be high.  In addition, the interaction plot reveals that lower cutting speed and higher life of a machine tool also produce a higher yield.
 
 
 ##6.3
@@ -91,6 +98,7 @@ board.}
 \textbf{(a) Analyze the data from this experiment.}
 
 ```{r}
+# creating data table
 A <- rep(c("-","+","-","+"), times = 4)
 B <- rep(c("-","-","+","+"), times = 4)
 Rep <- rep(c("I","II","III","IV"), each = 4)
