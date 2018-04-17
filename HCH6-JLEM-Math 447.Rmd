@@ -17,6 +17,7 @@ The results are as follows:}
 large?}
 
 ```{r}
+# creating data table
 factorA = rep(c("-","+","-","+","-","+","-","+"), times = 3)
 factorB = rep(c("-","-","+","+","-","-","+","+"), times = 3)
 factorC = rep(c("-","-","-","-","+","+","+","+"), times = 3)
@@ -25,21 +26,25 @@ yield = c(22,32,35,55,44,40,60,39,31,43,34,47,45,37,50,41,25,29,50,46,38,36,54,4
 
 cutting.speed.long = data.frame(factorA, factorB, factorC, Rep, yield)
 
+# linear regression
 cutting.speed.lm=lm(yield ~ coded(factorA) * coded(factorB) * coded(factorC), cutting.speed.long)
 summary(cutting.speed.lm)
+
+# interaction plot
+with(cutting.speed.long, interaction.plot(factorA, factorC, yield))
 ```
 
 \textbf{(b) Use the analysis of variance to confirm your conclusions
 for part (a).}
 
 ```{r}
-#aova
+# ANOVA test
 cutting.speed.aov=aov(yield ~ factorA * factorB * factorC, cutting.speed.long)
 summary(cutting.speed.aov)
 mse=summary(cutting.speed.aov)[[1]][8,3]
 mse
 ```
-
+The variables that we find statistically significant also match our results from estimating factor effects in part a.
 
 \textbf{(c) Write down a regression model for predicting tool life
 (in hours) based on the results of this experiment.}
@@ -53,13 +58,14 @@ $$y = \beta_0 + \beta_1 X_1 + \beta_2 + X_2 + \beta_3 + X_3 + \beta_{1,3} X_1 X_
 plots, what coded factor levels of A, B, and C
 would you recommend using?}
 
+
+
 ##6.3
 
 \textbf{Find the standard error of the factor effects and
 approximate 95 percent confidence limits for the factor effects
 in Problem 6.1. Do the results of this analysis agree with the
 conclusions from the analysis of variance?}
-
 
 ##6.5
 
@@ -74,6 +80,15 @@ vector of three accelerometers (x, y, and z) on each test circuit
 board.}
 
 \textbf{(a) Analyze the data from this experiment.}
+
+```{r}
+A <- rep(c("-","+","-","+"), times = 4)
+B <- rep(c("-","-","+","+"), times = 4)
+Rep <- rep(c("I","II","III","IV"), each = 4)
+Vibes <- c(18.2, 27.2, 15.9, 41.0, 18.9, 24.0, 14.5, 43.9, 12.9, 22.4, 15.1, 36.3, 14.4, 22.5, 14.2, 39.9)
+router.long <- data.frame(A, B, Rep, Vibes)
+```
+
 
 \textbf{(b) Construct a normal probability plot of the residuals,
 and plot the residuals versus the predicted vibration
