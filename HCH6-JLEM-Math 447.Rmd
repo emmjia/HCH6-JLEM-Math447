@@ -95,8 +95,19 @@ B <- rep(c("-","-","+","+"), times = 4)
 Rep <- rep(c("I","II","III","IV"), each = 4)
 Vibes <- c(18.2, 27.2, 15.9, 41.0, 18.9, 24.0, 14.5, 43.9, 12.9, 22.4, 15.1, 36.3, 14.4, 22.5, 14.2, 39.9)
 router.long <- data.frame(A, B, Rep, Vibes)
+
+# defining coded
+coded=function(x) #a function to code variable x
+{
+  ifelse(x=="+", 1, -1)
+}
+
+# linear regression
+router.lm=lm(Vibes ~ coded(A) * coded(B), router.long)
+summary(router.lm)
 ```
 
+Our linear regression reveals that both treatments are statistically significant, with both variables positively correlated with vibration levels.  In addition, there is evidence of interaction between the two.
 
 \textbf{(b) Construct a normal probability plot of the residuals,
 and plot the residuals versus the predicted vibration
@@ -105,6 +116,13 @@ level. Interpret these plots.}
 \textbf{(c) Draw the AB interaction plot. Interpret this plot. What
 levels of bit size and speed would you recommend for
 routine operation?}
+
+```{r}
+# interaction plot
+with(router.long, interaction.plot(A, B, Vibes))
+```
+
+This plot reaffirms the notion that there is an interaction effect present between both variables.  We'd recommend a $\frac{1}{16}$ in. bit size and 40rpm speed to minimize vibrations in this operation.
 
 ##6.6
 
