@@ -5,6 +5,12 @@ date: "April 16, 2018"
 output: pdf_document
 ---
 
+```{r}
+# loading libraries
+library(car)
+```
+
+
 ##6.1
 
 \textbf{An engineer is interested in the effects of cutting
@@ -40,6 +46,8 @@ summary(cutting.speed.lm)
 with(cutting.speed.long, interaction.plot(factorA, factorC, yield))
 ```
 
+The effects of tool geometry and cutting angle are statistically significant.  While cutting speed alone isn't statistically significant, its interaction with cutting angle is.  Therefore cutting speed should remain in the model.
+
 \textbf{(b) Use the analysis of variance to confirm your conclusions
 for part (a).}
 
@@ -50,6 +58,7 @@ summary(cutting.speed.aov)
 mse=summary(cutting.speed.aov)[[1]][8,3]
 mse
 ```
+
 The variables that we find statistically significant also match our results from estimating factor effects in part a.
 
 \textbf{(c) Write down a regression model for predicting tool life
@@ -62,7 +71,6 @@ $$y = \beta_0 + \beta_1 X_1 + \beta_2 + X_2 + \beta_3 + X_3 + \beta_{1,3} X_1 X_
 
 ```{r}
 res=cutting.speed.long$yield-fitted(cutting.speed.lm)
-library(car)
 qqPlot(res)
 plot(fitted(cutting.speed.lm), res) 
 ```
@@ -179,6 +187,13 @@ As a measure of the amount of effort required, he measured
 the elevation of the heart rate (pulse) induced by the task. The
 results follow. Analyze the data and draw conclusions. Analyze
 the residuals and comment on the model's adequacy.}
+
+```{r}
+# creating data table
+type <- rep(c("Glass", "Plastic"), times = 4)
+worker <- rep(c("1", "2"), each = 2, times = 2) # pick up here
+```
+
 
 ##6.11
 
