@@ -54,6 +54,15 @@ $$y = \beta_0 + \beta_1 X_1 + \beta_2 + X_2 + \beta_3 + X_3 + \beta_{1,3} X_1 X_
 
 \textbf{(d) Analyze the residuals. Are there any obvious problems?}
 
+```{r}
+res=cutting.speed.long$yield-fitted(cutting.speed.lm)
+library(car)
+qqPlot(res)
+plot(fitted(cutting.speed.lm), res) 
+```
+
+We take a look at our normality plot and can state that normality is good. We take a look at our residual plot and see no patterns, our model is good.
+
 \textbf{(e) On the basis of an analysis of main effect and interaction
 plots, what coded factor levels of A, B, and C
 would you recommend using?}
