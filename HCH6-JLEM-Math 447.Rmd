@@ -229,6 +229,34 @@ for the factor effects in Problem 6.10. Do the results of this
 analysis agree with the analysis of variance performed in
 Problem 6.10?}
 
+```{r}
+#checking Standard error=sqrt(mse/N)
+n=4;a=b=2;N=a*b*n
+alpha=0.05
+sqrt(mse/N)
+#consturct CI for regression coefficient (example, for coded(A))
+se=sqrt(mse/N)
+df=a*b*(n-1)
+
+hat.beta1=bottle.lm$coefficients[2]
+CI.beta=hat.beta1+c(-1,1)*qt(alpha/2,df,lower.tail = F)*se
+CI.beta
+2*CI.beta #CI for main effect A
+
+hat.beta1=bottle.lm$coefficients[3]
+CI.beta=hat.beta1+c(-1,1)*qt(alpha/2,df,lower.tail = F)*se
+CI.beta
+2*CI.beta #CI for main effect B
+
+hat.beta1=bottle.lm$coefficients[4]
+CI.beta=hat.beta1+c(-1,1)*qt(alpha/2,df,lower.tail = F)*se
+CI.beta
+2*CI.beta #CI for main effect AB
+
+```
+
+
+
 ##6.17
 
 \textbf{An experimenter has run a single replicate of a 24
