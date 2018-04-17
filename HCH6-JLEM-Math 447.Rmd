@@ -83,6 +83,22 @@ approximate 95 percent confidence limits for the factor effects
 in Problem 6.1. Do the results of this analysis agree with the
 conclusions from the analysis of variance?}
 
+```{r}
+#checking Standard error=sqrt(mse/N)
+n=3;a=b=c=2;N=a*b*c*n
+alpha=0.05
+sqrt(mse/N)
+#consturct CI for regression coefficient (example, for coded(A))
+se=sqrt(mse/N)
+df=a*b*c*(n-1)
+hat.beta1=cutting.speed.lm$coefficients[2]
+CI.beta=hat.beta1+c(-1,1)*qt(alpha/2,df,lower.tail = F)*se
+CI.beta
+2*CI.beta #CI for main effect A
+```
+
+Standard Error is 1.12 and the confidence interval for the factor effects are (-4.42, 5.0867).
+
 ##6.5
 
 \textbf{A router is used to cut locating notches on a printed
