@@ -1,7 +1,6 @@
 # HCH6-JLEM-Math447
--[] Problem 6.1
-	-[] Part a
-	-[] Part b
-	-[] Part c
-	-[] Part d
-	-[] Part e
+-[x] 6.1.a
+-[ ] 6.1.b
+-[ ] 6.1.c
+-[ ] 6.1.d
+-[ ] 6.1.e
