@@ -1,0 +1,167 @@
+---
+title: "Chapter 6 (8th Edition): 6.1, 6.3, 6.5, 6.6, 6.10, 6.11, 6.17, 6.22, 6.23, 6.25, 6.36, 6.37 "
+author: "Jeremy Ling & Emmanuel Mejia"
+date: "April 16, 2018"
+output: pdf_document
+---
+
+##6.1
+
+\textbf{An engineer is interested in the effects of cutting
+speed (A), tool geometry (B), and cutting angle (C) on the life
+(in hours) of a machine tool. Two levels of each factor are
+chosen, and three replicates of a $2^3$ factorial design are run.
+The results are as follows:}
+
+\textbf{(a) Estimate the factor effects. Which effects appear to be
+large?}
+
+\textbf{(b) Use the analysis of variance to confirm your conclusions
+for part (a).}
+
+\textbf{(c) Write down a regression model for predicting tool life
+(in hours) based on the results of this experiment.}
+
+\textbf{(d) Analyze the residuals. Are there any obvious problems?}
+
+\textbf{(e) On the basis of an analysis of main effect and interaction
+plots, what coded factor levels of A, B, and C
+would you recommend using?}
+
+##6.3
+
+\textbf{Find the standard error of the factor effects and
+approximate 95 percent confidence limits for the factor effects
+in Problem 6.1. Do the results of this analysis agree with the
+conclusions from the analysis of variance?}
+
+##6.5
+
+\textbf{A router is used to cut locating notches on a printed
+circuit board. The vibration level at the surface of the board
+as it is cut is considered to be a major source of dimensional
+variation in the notches. Two factors are thought to influence vibration: bit size (A) and cutting speed (B). Two bit sizes (1/16
+and 1/8 in.) and two speeds (40 and 90 rpm) are selected, and
+four boards are cut at each set of conditions shown below.
+The response variable is vibration measured as the resultant
+vector of three accelerometers (x, y, and z) on each test circuit
+board.}
+
+\textbf{(a) Analyze the data from this experiment.}
+
+\textbf{(b) Construct a normal probability plot of the residuals,
+and plot the residuals versus the predicted vibration
+level. Interpret these plots.}
+
+\textbf{(c) Draw the AB interaction plot. Interpret this plot. What
+levels of bit size and speed would you recommend for
+routine operation?}
+
+##6.6
+
+\textbf{Reconsider the experiment described in Problem 6.1.
+Suppose that the experimenter only performed the eight trials
+from replicate I. In addition, he ran four center points and
+obtained the following response values: 36, 40, 43, 45.}
+
+\textbf{(a) Estimate the factor effects. Which effects are large?}
+
+\textbf{(b) Perform an analysis of variance, including a check for
+pure quadratic curvature. What are your conclusions?}
+
+\textbf{(c) Write down an appropriate model for predicting tool
+life, based on the results of this experiment. Does this
+model differ in any substantial way from the model in
+Problem 6.1, part (c)?}
+
+\textbf{(d) Analyze the residuals.}
+
+\textbf{(e) What conclusions would you draw about the appropriate
+operating conditions for this process?}
+
+##6.10
+
+\textbf{In Problem 6.9, the engineer was also interested in
+potential fatigue differences resulting from the two types of bottles.
+As a measure of the amount of effort required, he measured
+the elevation of the heart rate (pulse) induced by the task. The
+results follow. Analyze the data and draw conclusions. Analyze
+the residuals and comment on the model's adequacy.}
+
+##6.11
+
+\textbf{Calculate approximate 95 percent confidence limits
+for the factor effects in Problem 6.10. Do the results of this
+analysis agree with the analysis of variance performed in
+Problem 6.10?}
+
+##6.17
+
+\textbf{An experimenter has run a single replicate of a 24
+design. The following effect estimates have been calculated:}
+
+\textbf{(a) Construct a normal probability plot of these effects.}
+
+\textbf{(b) Identify a tentative model, based on the plot of the
+effects in part (a).}
+
+##6.22
+
+\textbf{Semiconductor manufacturing processes have long
+and complex assembly flows, so matrix marks and automated
+2d-matrix readers are used at several process steps throughout
+factories. Unreadable matrix marks negatively affect factory
+run rates because manual entry of part data is required before
+manufacturing can resume. A $2^4$ factorial experiment was conducted
+to develop a 2d-matrix laser mark on a metal cover that
+protects a substrate-mounted die. The design factors are A $
+laser power (9 and 13 W), B $ laser pulse frequency (4000 and
+12,000 Hz), C $ matrix cell size (0.07 and 0.12 in.), and D $
+writing speed (10 and 20 in./sec), and the response variable is
+the unused error correction (UEC). This is a measure of the
+unused portion of the redundant information embedded in the
+2d-matrix. A UEC of 0 represents the lowest reading that still
+results in a decodable matrix, while a value of 1 is the highest
+reading. A DMX Verifier was used to measure UEC. The data
+from this experiment are shown in Table P6.5.}
+
+\textbf{(a) Analyze the data from this experiment. Which factors
+significantly affect UEC?}
+
+\textbf{(b) Analyze the residuals from this experiment. Are there
+any indications of model inadequacy?}
+
+##6.23
+
+\textbf{Reconsider the experiment described in Problem 6.20.
+Suppose that four center points are available and that the UEC
+response at these four runs is 0.98, 0.95, 0.93, and 0.96, respectively.
+Reanalyze the experiment incorporating a test for curvature
+into the analysis. What conclusions can you draw? What
+recommendations would you make to the experimenters?}
+
+##6.25
+
+\textbf{Consider the single replicate of the $2^4$ design in
+Example 6.2. Suppose that we had arbitrarily decided to analyze
+the data assuming that all three- and four-factor interactions
+were negligible. Conduct this analysis and compare your
+results with those obtained in the example. Do you think that
+it is a good idea to arbitrarily assume interactions to be negligible
+even if they are relatively high-order ones?}
+
+##6.36
+
+\textbf{Resistivity on a silicon wafer is influenced by several
+factors. The results of a $2^4$ factorial experiment performed
+during a critical processing step is shown in Table P6.10.}
+
+##6.37
+
+\textbf{Continuation of Problem 6.36. Suppose that the
+experimenter had also run four center points along with the 16
+runs in Problem 6.36. The resistivity measurements at the center
+points are 8.15, 7.63, 8.95, and 6.48. Analyze the experiment
+again incorporating the center points. What conclusions
+can you draw now?}
+
