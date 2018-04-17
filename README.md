@@ -1,3 +1,7 @@
 # HCH6-JLEM-Math447
-Exercises from Chapter 6 of Design and Analysis of Experiments
-
+-[] Problem 6.1
+	-[] Part a
+	-[] Part b
+	-[] Part c
+	-[] Part d
+	-[] Part e
