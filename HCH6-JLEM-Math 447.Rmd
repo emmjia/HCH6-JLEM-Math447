@@ -252,10 +252,9 @@ hat.beta1=bottle.lm$coefficients[4]
 CI.beta=hat.beta1+c(-1,1)*qt(alpha/2,df,lower.tail = F)*se
 CI.beta
 2*CI.beta #CI for main effect AB
-
 ```
 
-
+The only confidence interval the doesn't contain 0 is the one associated with 'worker'.  The results agree with those receive from the ANOVA test we ran earlier.
 
 ##6.17
 
