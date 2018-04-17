@@ -17,6 +17,7 @@ The results are as follows:}
 large?}
 
 ```{r}
+# creating data table
 factorA = rep(c("-","+","-","+","-","+","-","+"), times = 3)
 factorB = rep(c("-","-","+","+","-","-","+","+"), times = 3)
 factorC = rep(c("-","-","-","-","+","+","+","+"), times = 3)
@@ -25,14 +26,12 @@ yield = c(22,32,35,55,44,40,60,39,31,43,34,47,45,37,50,41,25,29,50,46,38,36,54,4
 
 cutting.speed.long = data.frame(factorA, factorB, factorC, Rep, yield)
 
+# linear regression
+cutting.speed.lm=lm(yield ~ coded(factorA) * coded(factorB) * coded(factorC), cutting.speed.long)
+summary(cutting.speed.lm)
+
+# interaction plot
 with(cutting.speed.long, interaction.plot(factorA, factorC, yield))
-
-#Treatment.Comination=c("(1)","a","b","ab","c","ac","bc","abc")
-#rep1 = c(22,32,35,55,44,40,60,39)
-#rep2 = c(31,43,34,47,45,37,50,41)
-#rep3 = c(25,29,50,46,38,36,54,47)
-
-#cutting.speed = data.frame(factorA,factorB,factorC,Treatment.Comination,rep1,rep2,rep3)
 ```
 
 \textbf{(b) Use the analysis of variance to confirm your conclusions
