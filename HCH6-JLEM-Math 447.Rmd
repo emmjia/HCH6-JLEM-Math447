@@ -23,7 +23,7 @@ factorC = rep(c("-","-","-","-","+","+","+","+"), times = 3)
 Rep = rep(c("I", "II", "III"), each = 8)
 yield = c(22,32,35,55,44,40,60,39,31,43,34,47,45,37,50,41,25,29,50,46,38,36,54,47)
 
-cutting.speed = data.frame(factorA, factorB, factorC, Rep, yield)
+cutting.speed.long = data.frame(factorA, factorB, factorC, Rep, yield)
 
 #Treatment.Comination=c("(1)","a","b","ab","c","ac","bc","abc")
 #rep1 = c(22,32,35,55,44,40,60,39)
