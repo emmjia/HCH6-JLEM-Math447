@@ -329,6 +329,11 @@ Pulse.Freq = c(1,-1,1,-1,1,1,-1,-1,1,-1,-1,-1,-1,1,1,1)
 \textbf{(a) Analyze the data from this experiment. Which factors
 significantly affect UEC?}
 
+```{r}
+
+```
+
+
 \textbf{(b) Analyze the residuals from this experiment. Are there
 any indications of model inadequacy?}
 
