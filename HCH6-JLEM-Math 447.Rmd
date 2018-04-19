@@ -296,6 +296,11 @@ from this experiment are shown in Table P6.5.}
 \textbf{(a) Analyze the data from this experiment. Which factors
 significantly affect UEC?}
 
+```{r}
+
+```
+
+
 \textbf{(b) Analyze the residuals from this experiment. Are there
 any indications of model inadequacy?}
 
