@@ -17,8 +17,8 @@
 - [x] 6.11
 - [x] 6.17.a
 - [x] 6.17.b
-- [ ] 6.22.a
-- [ ] 6.22.b
+- [x] 6.22.a(The answer is good, may want to double check with another example if time permits it)
+- [x] 6.22.b
 - [ ] 6.23
 - [ ] 6.25
 - [ ] 6.36.a
