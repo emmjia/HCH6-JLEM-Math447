@@ -8,6 +8,7 @@ output: pdf_document
 ```{r}
 # loading libraries
 library(car)
+library(gplots)
 ```
 
 
@@ -274,10 +275,29 @@ design. The following effect estimates have been calculated:}
 letter = c("A","B","C","D","AB","AC","AD","BC","BD","CD","ABC","ABD","ACD","BCD","ABCD")
 number = c(76.95,-67.52,-7.84,-18.73,-51.32,11.69,9.78,20.79,14.74,1.27,-2.82,-6.50,10.20,-7.98,-6.25)
 experiment = data.frame(letter, number)
+
+experiment.aov = aov(number ~ coded(letter), experiment)
+
+
+plot = qqnorm(abs(number))
+## click at the "outlier" points and then click "Finish" button
+
+
+lister = sort(abs(number))
+
+qqnorm(lister)
+abline(h = 76.95, col = "red")
+abline(h = 67.52, col = "purple")
+abline(h = 51.32, col = "blue")
+#factor A, B, and AB
 ```
 
 \textbf{(b) Identify a tentative model, based on the plot of the
 effects in part (a).}
+
+$$\hat{y} = \beta_0 + 75.95x_a + 67.52x_b + 51.32x_{ab}$$
+
+
 
 ##6.22
 
@@ -288,9 +308,9 @@ factories. Unreadable matrix marks negatively affect factory
 run rates because manual entry of part data is required before
 manufacturing can resume. A $2^4$ factorial experiment was conducted
 to develop a 2d-matrix laser mark on a metal cover that
-protects a substrate-mounted die. The design factors are A $
-laser power (9 and 13 W), B $ laser pulse frequency (4000 and
-12,000 Hz), C $ matrix cell size (0.07 and 0.12 in.), and D $
+protects a substrate-mounted die. The design factors are A =
+laser power (9 and 13 W), B = laser pulse frequency (4000 and
+12,000 Hz), C = matrix cell size (0.07 and 0.12 in.), and D =
 writing speed (10 and 20 in./sec), and the response variable is
 the unused error correction (UEC). This is a measure of the
 unused portion of the redundant information embedded in the
@@ -298,6 +318,13 @@ unused portion of the redundant information embedded in the
 results in a decodable matrix, while a value of 1 is the highest
 reading. A DMX Verifier was used to measure UEC. The data
 from this experiment are shown in Table P6.5.}
+
+```{r}
+Standard.Order = c(8,10,12,9,7,15,2,6,16,13,5,14,1,3,4,11)
+Run.Order = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
+Laser.Power = c(1,1,1,-1,-1,-1,1,1,1,-1,-1,1,-1,-1,1,-1)
+Pulse.Freq = c(1,-1,1,-1,1,1,-1,-1,1,-1,-1,-1,-1,1,1,1)
+```
 
 \textbf{(a) Analyze the data from this experiment. Which factors
 significantly affect UEC?}
