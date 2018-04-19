@@ -262,7 +262,7 @@ CI.beta
 2*CI.beta #CI for main effect AB
 ```
 
-The only confidence interval the doesn't contain 0 is the one associated with 'worker'.  The results agree with those receive from the ANOVA test we ran earlier.
+Confidence interval for main effect A is (-3.16, 13.4), for main effect B is (17.33, 33.91), and for interaction effect AB is (-4.66, 11.9). The only confidence interval the doesn't contain 0 is the one associated with 'worker'.  The results agree with those receive from the ANOVA test we ran earlier.
 
 ##6.17
 
