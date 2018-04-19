@@ -172,20 +172,70 @@ obtained the following response values: 36, 40, 43, 45.}
 
 \textbf{(a) Estimate the factor effects. Which effects are large?}
 
+```{r}
+# defining coded
+coded=function(x) #a function to code variable x
+{
+  ifelse(x=="+", 1, 
+         ifelse(x == "0", 0, -1))
+}
 
+# creating data table
+factorA <- c(coded(cutting.speed.long$factorA[1:8]), 0, 0, 0, 0)
+factorB <- c(coded(cutting.speed.long$factorB[1:8]), 0, 0, 0, 0)
+factorC <- c(coded(cutting.speed.long$factorC[1:8]), 0, 0, 0, 0)
+yield <- c(cutting.speed.long[1:8, "yield"], 36, 40, 43, 45)
+
+cutting.speed.small <- data.frame(cbind(factorA, factorB, factorC, yield))
+
+# linear regression
+cutting.speed.lm2=lm(yield ~ factorA * factorB * factorC + I(factorA^2) + I(factorB^2) + I(factorC^2), cutting.speed.small)
+
+# interaction plot
+with(cutting.speed.small, interaction.plot(factorA, factorC, yield))
+  
+summary(cutting.speed.lm2)
+```
+
+Our linear model reveals that our largest factor effects are exactly thhe same as those found in Problem 6.1.
 
 \textbf{(b) Perform an analysis of variance, including a check for
 pure quadratic curvature. What are your conclusions?}
+
+```{r}
+# center vs. factorial averages
+yc_bar <- mean(cutting.speed.small$yield[9:12])
+test <- mean(cutting.speed.small$yield[1:8])
+
+# ANOVA test
+cutting.speed.aov2 <- aov(yield ~ factorA * factorB * factorC + I(factorA^2) + I(factorB^2) + I(factorC^2), cutting.speed.small)
+summary(cutting.speed.aov2)
+```
+
+The ANOVA test reveals that there is no statistically significant reason to suspect that there is any quadratic curvature in our model.
 
 \textbf{(c) Write down an appropriate model for predicting tool
 life, based on the results of this experiment. Does this
 model differ in any substantial way from the model in
 Problem 6.1, part (c)?}
 
+Because we know that quadratic curvature should not be introduced to our model, our appropriate model is the same as in Problem 6.1.
+$$y = \beta_0 + \beta_1 X_1 + \beta_2 + X_2 + \beta_3 + X_3 + \beta_{1,3} X_1 X_3$$
+
 \textbf{(d) Analyze the residuals.}
+
+```{r}
+res=cutting.speed.small$yield-fitted(cutting.speed.lm2)
+qqPlot(res)
+plot(fitted(cutting.speed.lm2), res) 
+```
+
+There are patterns present, but this is due to the introduction of our 4 observations.
 
 \textbf{(e) What conclusions would you draw about the appropriate
 operating conditions for this process?}
+
+Exactly like in Problem 6.1, a high cutting angle, low cutting speed, and high life of a machine tool will produce a higher yield.
 
 ##6.10
 

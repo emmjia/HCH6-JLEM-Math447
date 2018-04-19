@@ -8,10 +8,10 @@
 - [x] 6.5.a
 - [ ] 6.5.b (conclusion needed)
 - [x] 6.5.c
-- [ ] 6.6.a
+- [ ] 6.6.a (interaction plot has no lines)
 - [ ] 6.6.b
 - [ ] 6.6.c
-- [ ] 6.6.d
+- [ ] 6.6.d (residuals look weird)
 - [ ] 6.6.e
 - [x] 6.10
 - [x] 6.11
