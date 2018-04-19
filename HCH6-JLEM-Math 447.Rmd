@@ -322,24 +322,46 @@ from this experiment are shown in Table P6.5.}
 ```{r}
 Standard.Order = c(8,10,12,9,7,15,2,6,16,13,5,14,1,3,4,11)
 Run.Order = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
-Laser.Power = c(1,1,1,-1,-1,-1,1,1,1,-1,-1,1,-1,-1,1,-1)
-Pulse.Freq = c(1,-1,1,-1,1,1,-1,-1,1,-1,-1,-1,-1,1,1,1)
-Cell.Size = c(1,-1,-1,-1,1,1,-1,1,1,1,1,1,-1,-1,-1,-1)
-Writing.Speed = c(-1,1,1,1,-1,1,-1,-1,1,1,-1,1,-1,-1,-1,1)
+A = Laser.Power = c(1,1,1,-1,-1,-1,1,1,1,-1,-1,1,-1,-1,1,-1)
+B = Pulse.Freq = c(1,-1,1,-1,1,1,-1,-1,1,-1,-1,-1,-1,1,1,1)
+C = Cell.Size = c(1,-1,-1,-1,1,1,-1,1,1,1,1,1,-1,-1,-1,-1)
+D = Writing.Speed = c(-1,1,1,1,-1,1,-1,-1,1,1,-1,1,-1,-1,-1,1)
 UEC = c(0.8,0.81,0.79,0.6,0.65,0.55,0.98,0.67,0.69,0.56,0.63,0.65,0.75,0.72,0.98,0.63)
-error = data.frame(Standard.Order,Run.Order,Laser.Power,Pulse.Freq, Cell.Size, Writing.Speed,UEC)
+error = data.frame(Standard.Order,Run.Order,A,B,C,D,UEC)
 ```
 
 \textbf{(a) Analyze the data from this experiment. Which factors
 significantly affect UEC?}
 
 ```{r}
+error.lm = lm(UEC ~A*B*C*D, error)
+qqnorm(aov(UEC ~ A * B * C * D, error), label=T, full=T)
+coef=error.lm$coefficients[-1]
+variables=names(coef)
+plot=qqnorm(coef)
+variables[identify(plot)]
 
+
+##new model
+error.aov = aov(UEC ~ A+C+D, error)
+summary(error.aov)
 ```
+
+With the help of the normal probability plot we are able to identify that "A", "C", "D" are important. After choosing my factors, I plug them into a ANOVA and discover that all factors are significantly different.
 
 
 \textbf{(b) Analyze the residuals from this experiment. Are there
 any indications of model inadequacy?}
+
+```{r}
+error.lm2 = lm(UEC~ A*C*D, error)
+res=error$UEC-fitted(error.lm2)
+library(car)
+qqPlot(res)
+plot(fitted(error.lm2), res) 
+```
+
+After studying the normality and residuals we can state that normality is good and residuals are patternless and random. We may conclude that model is good.
 
 ##6.23
 
