@@ -447,14 +447,21 @@ B <- rep(c("-", "+"), each = 2, times = 4)
 C <- rep(c("-", "+"), each = 4, times = 2)
 D <- rep(c("-", "+"), each = 8)
 Filtration.Rate = c(45,71,48,65,68,60,80,65,43,100,45,104,75,86,70,96)
-chem.long <- data.frame(Run.Number,A, B, C, D,Run.Label,Filtration.Rate)
+chem.long <- data.frame(Run.Number,A, B, C, D,Filtration.Rate)
 
 # defining coded
 coded=function(x) #a function to code variable x
 {
   ifelse(x=="+", 1, -1)
 }
+
+chem.lm = lm(Filtration.Rate ~ coded(A)*coded(B)+coded(A)*coded(C)+coded(A)*coded(D)+coded(B)*coded(C)+coded(B)*coded(D)+coded(C)*coded(D), chem.long)
+summary(chem.lm)
 ```
+
+![Probability plot for Example 6.2](C:/Users/Emmanuel/Desktop/SPRING 2018/GitHub/HCH6-JLEM-Math447/probplot6.2.png)
+
+Looking at our p-values from our linear model. We see that A, C, D, AC, and AD are all significanlty different and important. Take a look at our plot we notice the exact same results. There is no difference in our linear model and probability plot results.
 
 ##6.36
 
@@ -487,11 +494,49 @@ summary(wafer.lm)
 #plot = qqnorm(abs(number))
 ```
 
+After plotting our ANOVA in a probability model we see that factor A, B, and interaction factor A*B are important. We create a linear model with these results. We  look at our results for our model and see all p-values are small and all factors are significantly different in our model.
+
 \textbf{(b) Fit the model identified in part (a) and analyze the residuals.  Is there any indication of model inadequacy.}
+
+```{r}
+wafer.lm <- lm((Resistivity) ~ coded(A) + coded(B) + coded(A) * coded(B), wafer.long)
+res=wafer.long$Resistivity-fitted(wafer.lm)
+qqPlot(res)
+plot(fitted(wafer.lm), res)
+```
 
 \textbf{(c) Repeat the analysis from parts (a) and (b) using ln(y) as the response variable.  Is there an indication that the transforation has been useful?}
 
+```{r}
+wafer.lm2 <- lm(log(Resistivity) ~ coded(A) + coded(B) + coded(A) * coded(B), wafer.long)
+res=wafer.long$Resistivity-fitted(wafer.lm2)
+qqPlot(res)
+plot(fitted(wafer.lm2), res)
+```
+
 \textbf{(d) Fit a model in terms of the coded variables that can be used to predict the resistivity.}
+
+```{r}
+#Dropping factors
+#A B
+wafer.lm3 <- lm(log(Resistivity) ~ coded(A) + coded(B), wafer.long)
+summary(wafer.lm3)
+res=wafer.long$Resistivity-fitted(wafer.lm3)
+qqPlot(res)
+plot(fitted(wafer.lm3), res)
+
+##A AB
+wafer.lm4 <- lm(log(Resistivity) ~ coded(A) + coded(A)*coded(B), wafer.long)
+res=wafer.long$Resistivity-fitted(wafer.lm4)
+qqPlot(res)
+plot(fitted(wafer.lm4), res)
+
+##B AB
+wafer.lm5 <- lm(log(Resistivity) ~ coded(B) + coded(A)*coded(B), wafer.long)
+res=wafer.long$Resistivity-fitted(wafer.lm5)
+qqPlot(res)
+plot(fitted(wafer.lm5), res)
+```
 
 ##6.37
 
