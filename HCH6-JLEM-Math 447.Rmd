@@ -541,4 +541,4 @@ qqPlot(res)
 plot(fitted(wafer.lm22), res) 
 ```
 
-With the introduction of center points to our dataset, we find that therer is statistically significant evidence of curvature in our model.  In addition, A, B, and AB are also statistically significant to our model. 
+With the introduction of center points to our dataset, we find that therer is statistically significant evidence of curvature in our model.  In addition, A, B, and AB are also statistically significant to our model.

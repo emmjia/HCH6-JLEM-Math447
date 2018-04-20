@@ -25,6 +25,6 @@
 - [ ] 6.36.b
 - [ ] 6.36.c
 - [ ] 6.36.d
-- [ ] 6.37
+- [] 6.37 (residuals look weird)
 
 Note: Add tests in summaries after checking all problems!
