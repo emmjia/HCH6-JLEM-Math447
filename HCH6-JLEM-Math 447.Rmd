@@ -422,6 +422,12 @@ Reanalyze the experiment incorporating a test for curvature
 into the analysis. What conclusions can you draw? What
 recommendations would you make to the experimenters?}
 
+```{r}
+Run = c(1,2,3,4,5,6,7,8)
+A = c("-","+","-","+","-","+","-","+")
+B = c("-","-","+","+","")
+```
+
 ##6.25
 
 \textbf{Consider the single replicate of the $2^4$ design in
@@ -431,6 +437,12 @@ were negligible. Conduct this analysis and compare your
 results with those obtained in the example. Do you think that
 it is a good idea to arbitrarily assume interactions to be negligible
 even if they are relatively high-order ones?}
+
+```{r}
+Run.Number = c(1:16)
+Run.Label = c("(1)","a,","b","ab","C","ac","bc","abc","d","ad","bd","abd","cd","acd","bcd","abcd")
+
+```
 
 ##6.36
 
