@@ -461,6 +461,14 @@ coded=function(x) #a function to code variable x
 factors. The results of a $2^4$ factorial experiment performed
 during a critical processing step is shown in Table P6.10.}
 
+\textbf{(a) Estimate the factor effects.  Plot the effect estimates on a normal probability plot and select a tentative model.}
+
+\textbf{(b) Fit the model identified in part (a) and analyze the residuals.  Is there any indication of model inadequacy.}
+
+\textbf{(c) Repeat the analysis from parts (a) and (b) using ln(y) as the response variable.  Is there an indication that the transforation has been useful?}
+
+\textbf{(d) Fit a model in terms of the coded variables that can be used to predict the resistivity.}
+
 ##6.37
 
 \textbf{Continuation of Problem 6.36. Suppose that the
