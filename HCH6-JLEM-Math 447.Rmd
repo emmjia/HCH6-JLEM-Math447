@@ -547,3 +547,43 @@ points are 8.15, 7.63, 8.95, and 6.48. Analyze the experiment
 again incorporating the center points. What conclusions
 can you draw now?}
 
+```{r}
+# creating data table
+A <- c(rep(c(-1, 1), times = 8), 0, 0, 0, 0)
+B <- c(rep(c(-1, 1), each = 2, times = 4), 0, 0, 0, 0)
+C <- c(rep(c(-1, 1), each = 4, times = 2), 0, 0, 0, 0)
+D <- c(rep(c(-1, 1), each = 8), 0, 0, 0, 0)
+Resistivity <- c(1.92, 11.28, 1.09, 5.75, 2.13, 9.53, 1.03, 5.35, 1.60, 11.73, 1.16, 4.68, 2.16, 9.11, 1.07, 5.30, 8.15, 7.63, 8.95, 6.48)
+wafer.long2 <- data.frame(Resistivity, A, B, C, D)
+
+# center vs. factorial averages
+yc_bar <- mean(wafer.long2$Resistivity[1:16])
+test <- mean(wafer.long2$Resistivity[17:20])
+
+# linear regression
+wafer.lm21 <- lm(Resistivity ~ A * B * C * D + I(A^2) + I(B^2) + I(C^2) + I(D^2), wafer.long2)
+summary(wafer.lm21)
+
+# ANOVA test
+wafer.aov21 <- aov(Resistivity ~ A * B * C * D + I(A^2) + I(B^2) + I(C^2) + I(D^2), wafer.long2)
+summary(wafer.aov21)
+
+# checking model adequacy
+res=wafer.long2$Resistivity-fitted(wafer.lm21)
+qqPlot(res)
+plot(fitted(wafer.lm21), res)
+
+# Rebuild model
+wafer.lm22 <- lm(Resistivity ~ A * B + I(A^2) + I(B^2), wafer.long2)
+summary(wafer.lm22)
+
+wafer.aov22 <- aov(Resistivity ~ A * B + I(A^2) + I(B^2), wafer.long2)
+summary(wafer.aov22)
+
+# checking model adequacy
+res=wafer.long2$Resistivity-fitted(wafer.lm22)
+qqPlot(res)
+plot(fitted(wafer.lm22), res) 
+```
+
+With the introduction of center points to our dataset, we find that therer is statistically significant evidence of curvature in our model.  In addition, A, B, and AB are also statistically significant to our model.
