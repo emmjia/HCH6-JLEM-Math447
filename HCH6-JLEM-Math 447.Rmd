@@ -464,6 +464,34 @@ during a critical processing step is shown in Table P6.10.}
 
 \textbf{(a) Estimate the factor effects.  Plot the effect estimates on a normal probability plot and select a tentative model.}
 
+```{r}
+# creating data table
+A <- rep(c("-", "+"), times = 8)
+B <- rep(c("-", "+"), each = 2, times = 4)
+C <- rep(c("-", "+"), each = 4, times = 2)
+D <- rep(c("-", "+"), each = 8)
+Resistivity <- c(1.92, 11.28, 1.09, 5.75, 2.13, 9.53, 1.03, 5.35, 1.60, 11.73, 1.16, 4.68, 2.16, 9.11, 1.07, 5.30)
+wafer.long <- data.frame(Resistivity, A, B, C, D)
+
+# defining coded
+coded=function(x) #a function to code variable x
+{
+  ifelse(x=="+", 1, -1)
+}
+
+# linear regression
+wafer.lm <- lm(Resistivity ~ coded(A) * coded(B) * coded(C) + coded(A) * coded(B) * coded(D) + coded(A) * coded(C) * coded(D) + coded(B) * coded(C) * coded(D), wafer.long)
+summary(wafer.lm)
+
+# ANOVA test
+
+
+# normal probability plot
+#plot = qqnorm(abs(number))
+
+```
+
+
 \textbf{(b) Fit the model identified in part (a) and analyze the residuals.  Is there any indication of model inadequacy.}
 
 \textbf{(c) Repeat the analysis from parts (a) and (b) using ln(y) as the response variable.  Is there an indication that the transforation has been useful?}
