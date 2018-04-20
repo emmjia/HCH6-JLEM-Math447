@@ -486,16 +486,12 @@ coded=function(x) #a function to code variable x
   ifelse(x=="+", 1, -1)
 }
 
-# normal probability plot
-qqnorm(aov(Resistivity ~ coded(A) * coded(B)  * coded(C) + coded(A) * coded(B) * coded(D) + coded(A) * coded(C) * coded(D) + coded(B) * coded(C) * coded(D), wafer.long), label=T, full=T)
-coef=wafer.lm$coefficients[-1]
-variables=names(coef)
-plot=qqnorm(coef)
-variables[identify(plot)]
-
 # linear regression
-wafer.lm <- lm(Resistivity ~ coded(A) + coded(B) + coded(A) * coded(B), wafer.long)
+wafer.lm <- lm(Resistivity ~ coded(A) * coded(B) * coded(C) + coded(A) * coded(B) * coded(D) + coded(A) * coded(C) * coded(D) + coded(B) * coded(C) * coded(D), wafer.long)
 summary(wafer.lm)
+
+# normal probability plot
+#plot = qqnorm(abs(number))
 ```
 
 After plotting our ANOVA in a probability model we see that factor A, B, and interaction factor A*B are important. We create a linear model with these results. We  look at our results for our model and see all p-values are small and all factors are significantly different in our model.
