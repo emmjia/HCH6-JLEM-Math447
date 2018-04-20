@@ -479,12 +479,16 @@ coded=function(x) #a function to code variable x
   ifelse(x=="+", 1, -1)
 }
 
-# linear regression
-wafer.lm <- lm(Resistivity ~ coded(A) * coded(B) * coded(C) + coded(A) * coded(B) * coded(D) + coded(A) * coded(C) * coded(D) + coded(B) * coded(C) * coded(D), wafer.long)
-summary(wafer.lm)
-
 # normal probability plot
-#plot = qqnorm(abs(number))
+qqnorm(aov(Resistivity ~ coded(A) * coded(B)  * coded(C) + coded(A) * coded(B) * coded(D) + coded(A) * coded(C) * coded(D) + coded(B) * coded(C) * coded(D), wafer.long), label=T, full=T)
+coef=wafer.lm$coefficients[-1]
+variables=names(coef)
+plot=qqnorm(coef)
+variables[identify(plot)]
+
+# linear regression
+wafer.lm <- lm(Resistivity ~ coded(A) + coded(B) + coded(A) * coded(B), wafer.long)
+summary(wafer.lm)
 ```
 
 \textbf{(b) Fit the model identified in part (a) and analyze the residuals.  Is there any indication of model inadequacy.}
