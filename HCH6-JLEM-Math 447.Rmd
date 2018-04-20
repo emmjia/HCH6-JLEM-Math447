@@ -441,7 +441,18 @@ even if they are relatively high-order ones?}
 ```{r}
 Run.Number = c(1:16)
 Run.Label = c("(1)","a,","b","ab","C","ac","bc","abc","d","ad","bd","abd","cd","acd","bcd","abcd")
+# creating data table
+A <- rep(c("-", "+"), times = 8)
+B <- rep(c("-", "+"), each = 2, times = 4)
+C <- rep(c("-", "+"), each = 4, times = 2)
+D <- rep(c("-", "+"), each = 8)
+chem.long <- data.frame(A, B, C, D)
 
+# defining coded
+coded=function(x) #a function to code variable x
+{
+  ifelse(x=="+", 1, -1)
+}
 ```
 
 ##6.36
