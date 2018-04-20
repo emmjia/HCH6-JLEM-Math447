@@ -446,7 +446,8 @@ A <- rep(c("-", "+"), times = 8)
 B <- rep(c("-", "+"), each = 2, times = 4)
 C <- rep(c("-", "+"), each = 4, times = 2)
 D <- rep(c("-", "+"), each = 8)
-chem.long <- data.frame(A, B, C, D)
+Filtration.Rate = c(45,71,48,65,68,60,80,65,43,100,45,104,75,86,70,96)
+chem.long <- data.frame(Run.Number,A, B, C, D,Run.Label,Filtration.Rate)
 
 # defining coded
 coded=function(x) #a function to code variable x
