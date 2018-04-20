@@ -432,6 +432,22 @@ results with those obtained in the example. Do you think that
 it is a good idea to arbitrarily assume interactions to be negligible
 even if they are relatively high-order ones?}
 
+```{r}
+# creating data table
+A <- rep(c("-", "+"), times = 8)
+B <- rep(c("-", "+"), each = 2, times = 4)
+C <- rep(c("-", "+"), each = 4, times = 2)
+D <- rep(c("-", "+"), each = 8)
+chem.long <- data.frame(A, B, C, D)
+
+# defining coded
+coded=function(x) #a function to code variable x
+{
+  ifelse(x=="+", 1, -1)
+}
+```
+
+
 ##6.36
 
 \textbf{Resistivity on a silicon wafer is influenced by several
