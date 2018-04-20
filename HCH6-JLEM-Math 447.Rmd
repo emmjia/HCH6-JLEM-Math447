@@ -447,14 +447,21 @@ B <- rep(c("-", "+"), each = 2, times = 4)
 C <- rep(c("-", "+"), each = 4, times = 2)
 D <- rep(c("-", "+"), each = 8)
 Filtration.Rate = c(45,71,48,65,68,60,80,65,43,100,45,104,75,86,70,96)
-chem.long <- data.frame(Run.Number,A, B, C, D,Run.Label,Filtration.Rate)
+chem.long <- data.frame(Run.Number,A, B, C, D,Filtration.Rate)
 
 # defining coded
 coded=function(x) #a function to code variable x
 {
   ifelse(x=="+", 1, -1)
 }
+
+chem.lm = lm(Filtration.Rate ~ coded(A)*coded(B)+coded(A)*coded(C)+coded(A)*coded(D)+coded(B)*coded(C)+coded(B)*coded(D)+coded(C)*coded(D), chem.long)
+summary(chem.lm)
 ```
+
+![Probability plot for Example 6.2](C:/Users/Emmanuel/Desktop/SPRING 2018/GitHub/HCH6-JLEM-Math447/probplot6.2.png)
+
+Looking at our p-values from our linear model. We see that A, C, D, AC, and AD are all significanlty different and important. Take a look at our plot we notice the exact same results. There is no difference in our linear model and probability plot results.
 
 ##6.36
 
