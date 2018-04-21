@@ -423,10 +423,40 @@ into the analysis. What conclusions can you draw? What
 recommendations would you make to the experimenters?}
 
 ```{r}
-Run = c(1,2,3,4,5,6,7,8)
-A = c("-","+","-","+","-","+","-","+")
-B = c("-","-","+","+","")
+# creating data table
+A = Laser.Power = c(1,1,1,-1,-1,-1,1,1,1,-1,-1,1,-1,-1,1,-1,0,0,0,0)
+B = Pulse.Freq = c(1,-1,1,-1,1,1,-1,-1,1,-1,-1,-1,-1,1,1,1,0,0,0,0)
+C = Cell.Size = c(1,-1,-1,-1,1,1,-1,1,1,1,1,1,-1,-1,-1,-1,0,0,0,0)
+D = Writing.Speed = c(-1,1,1,1,-1,1,-1,-1,1,1,-1,1,-1,-1,-1,1,0,0,0,0)
+UEC = c(0.8,0.81,0.79,0.6,0.65,0.55,0.98,0.67,0.69,0.56,0.63,0.65,0.75,0.72,0.98,0.63,0.98,0.95,0.93,0.96)
+error2 = data.frame(A,B,C,D,UEC)
+
+#linear regression
+error.lm21 <- lm(UEC ~ A * B * C * D + I(A^2) + I(B^2) + I(C^2) + I(D^2), error2)
+summary(error.lm21)
+
+# ANOVA test
+error.aov21 <- aov(UEC ~ A * B * C * D + I(A^2) + I(B^2) + I(C^2) + I(D^2), error2)
+summary(error.aov21)
+
+# rebuild model
+error.lm22 <- lm(UEC ~ A*C + C*D + I(A^2) + I(B^2) + I(C^2) + I(D^2), error2)
+summary(error.lm22)
+
+error.aov22 <- aov(UEC ~A*C + C*D + I(A^2) + I(B^2) + I(C^2) + I(D^2), error2)
+summary(error.aov22)
+
+# interaction plot
+with(error2, interaction.plot(A, C, UEC))
+with(error2, interaction.plot(C, D, UEC))
+
+# checking model adequacy
+res=error2$UEC-fitted(error.lm22)
+qqPlot(res)
+plot(fitted(error.lm22), res) 
 ```
+
+After testing for where or not our model should account for curvature, we do indeed find that squared terms are statistically significant in helping predict UEC, and should be included in the model.  We'd recommend excluding laser pulse frequency from the model.  Also, laswer power at 13W, matrix cell size at .07in., and writing speed at 10 in./sec is recommended to achieve the highest mean UEC.
 
 ##6.25
 
