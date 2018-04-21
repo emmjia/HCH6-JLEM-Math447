@@ -19,12 +19,12 @@
 - [x] 6.17.b
 - [x] 6.22.a(The answer is good, may want to double check with another example if time permits it)
 - [x] 6.22.b
-- [ ] 6.23 (referring to 6.20 or 6.22?)
+- [ ] 6.23 (interaction plot has no lines)
 - [ ] 6.25
 - [ ] 6.36.a
 - [ ] 6.36.b
 - [ ] 6.36.c
 - [ ] 6.36.d
-- [] 6.37 (residuals look weird)
+- [ ] 6.37 (residuals look weird)
 
 Note: Add tests in summaries after checking all problems!
