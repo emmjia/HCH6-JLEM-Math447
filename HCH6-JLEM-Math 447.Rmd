@@ -1,11 +1,14 @@
 ---
-title: "Chapter 6 (8th Edition): 6.1, 6.3, 6.5, 6.6, 6.10, 6.11, 6.17, 6.22, 6.23, 6.25, 6.36, 6.37 "
+title: 'Chapter 6 (8th Edition): 6.1, 6.3, 6.5, 6.6, 6.10, 6.11, 6.17, 6.22, 6.23,
+  6.25, 6.36, 6.37 '
 author: "Jeremy Ling & Emmanuel Mejia"
-date: "April 16, 2018"
-output: pdf_document
+date: "April 24, 2018"
+output:
+  pdf_document: default
+  word_document: default
 ---
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # loading libraries
 library(car)
 library(gplots)
@@ -42,7 +45,9 @@ coded=function(x) #a function to code variable x
 # linear regression
 cutting.speed.lm=lm(yield ~ coded(factorA) * coded(factorB) * coded(factorC), cutting.speed.long)
 summary(cutting.speed.lm)
+```
 
+```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # interaction plot
 with(cutting.speed.long, interaction.plot(factorA, factorC, yield))
 ```
@@ -70,7 +75,7 @@ $$y = \beta_0 + \beta_1 X_1 + \beta_2 + X_2 + \beta_3 + X_3 + \beta_{1,3} X_1 X_
 
 \textbf{(d) Analyze the residuals. Are there any obvious problems?}
 
-```{r}
+```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 res=cutting.speed.long$yield-fitted(cutting.speed.lm)
 qqPlot(res)
 plot(fitted(cutting.speed.lm), res) 
@@ -83,6 +88,7 @@ plots, what coded factor levels of A, B, and C
 would you recommend using?}
 
 Because the coefficient for factorB is positive, cutting angle should be high.  In addition, the interaction plot reveals that lower cutting speed and higher life of a machine tool also produce a higher yield.
+
 
 
 ##6.3
@@ -107,6 +113,8 @@ CI.beta
 ```
 
 Standard Error is 1.12 and the confidence interval for the factor effects are (-4.42, 5.0867).
+
+
 
 ##6.5
 
@@ -147,21 +155,28 @@ Our linear regression reveals that both treatments are statistically significant
 and plot the residuals versus the predicted vibration
 level. Interpret these plots.}
 
-```{r}
+```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 router.aov = aov(Vibes ~ coded(A) * coded(B), router.long)
 qqnorm(router.aov, full=T)
+res=router.long$Vibes-fitted(router.lm)
+qqPlot(res)
+plot(fitted(router.lm), res) 
 ```
+
+Observing our plot we see that normality is on check and nothing unusual going on in our residual plot.
 
 \textbf{(c) Draw the AB interaction plot. Interpret this plot. What
 levels of bit size and speed would you recommend for
 routine operation?}
 
-```{r}
+```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # interaction plot
 with(router.long, interaction.plot(A, B, Vibes))
 ```
 
 This plot reaffirms the notion that there is an interaction effect present between both variables.  We'd recommend a $\frac{1}{16}$ in. bit size and 40rpm speed to minimize vibrations in this operation.
+
+
 
 ##6.6
 
@@ -172,7 +187,7 @@ obtained the following response values: 36, 40, 43, 45.}
 
 \textbf{(a) Estimate the factor effects. Which effects are large?}
 
-```{r}
+```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # defining coded
 coded=function(x) #a function to code variable x
 {
@@ -188,16 +203,16 @@ yield <- c(cutting.speed.long[1:8, "yield"], 36, 40, 43, 45)
 
 cutting.speed.small <- data.frame(cbind(factorA, factorB, factorC, yield))
 
-# linear regression
+#linear regression
 cutting.speed.lm2=lm(yield ~ factorA * factorB * factorC + I(factorA^2) + I(factorB^2) + I(factorC^2), cutting.speed.small)
-
-# interaction plot
-with(cutting.speed.small, interaction.plot(factorA, factorC, yield))
-  
-summary(cutting.speed.lm2)
+#prob plot
+coef=cutting.speed.lm2$coefficients[-1]
+variables=names(coef)
+plot=qqnorm(coef)
+variables[identify(plot)]
 ```
 
-Our linear model reveals that our largest factor effects are exactly thhe same as those found in Problem 6.1.
+After reviewing the probability plot we see that Factor B, Factor C, and FactorA * FactorC are the largest factors that stand out.
 
 \textbf{(b) Perform an analysis of variance, including a check for
 pure quadratic curvature. What are your conclusions?}
@@ -220,12 +235,13 @@ model differ in any substantial way from the model in
 Problem 6.1, part (c)?}
 
 Because we know that quadratic curvature should not be introduced to our model, our appropriate model is the same as in Problem 6.1.
-$$y = \beta_0 + \beta_1 X_1 + \beta_2 + X_2 + \beta_3 + X_3 + \beta_{1,3} X_1 X_3$$
+$$y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \beta_{1,3} X_1 X_3$$
 
 \textbf{(d) Analyze the residuals.}
 
-```{r}
-res=cutting.speed.small$yield-fitted(cutting.speed.lm2)
+```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
+cutting.speed.lm3 = lm(yield ~ factorA + factorB + factorC + factorA*factorC, cutting.speed.small)
+res=cutting.speed.small$yield-fitted(cutting.speed.lm3)
 qqPlot(res)
 plot(fitted(cutting.speed.lm2), res) 
 ```
@@ -237,6 +253,8 @@ operating conditions for this process?}
 
 Exactly like in Problem 6.1, a high cutting angle, low cutting speed, and high life of a machine tool will produce a higher yield.
 
+
+
 ##6.10
 
 \textbf{In Problem 6.9, the engineer was also interested in
@@ -246,7 +264,7 @@ the elevation of the heart rate (pulse) induced by the task. The
 results follow. Analyze the data and draw conclusions. Analyze
 the residuals and comment on the model's adequacy.}
 
-```{r}
+```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # creating data table
 type <- rep(c("Glass", "Plastic"), each = 4)
 worker <- rep(c("1", "2"), each = 8)
@@ -271,7 +289,9 @@ bottle.aov=aov(pulse ~ type * worker, bottle.long)
 summary(bottle.aov)
 mse=summary(bottle.aov)[[1]][4,3]
 mse
+```
 
+```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # checking model adequacy
 res=bottle.long$pulse-fitted(bottle.lm)
 qqPlot(res)
@@ -279,6 +299,8 @@ plot(fitted(bottle.lm), res)
 ```
 
 When estimating factor effects, we don't suspect any interaction effects between bottle type and worker.  Both our linear model and ANOVA test suggest that worker is statistically significant in predicting heart rate when performing the task, and reaffirm the conclusion we made in our interaction plot.  When checking model adequacy, our qqplot reveals that our data is normally distributed, while the variances of residuals in our residual plot don't seem homogenous.  As a result, the model may not be adequate.
+
+
 
 ##6.11
 
@@ -314,6 +336,8 @@ CI.beta
 
 Confidence interval for main effect A is (-3.16, 13.4), for main effect B is (17.33, 33.91), and for interaction effect AB is (-4.66, 11.9). The only confidence interval the doesn't contain 0 is the one associated with 'worker'.  The results agree with those receive from the ANOVA test we ran earlier.
 
+
+
 ##6.17
 
 \textbf{An experimenter has run a single replicate of a $2^4$
@@ -321,7 +345,7 @@ design. The following effect estimates have been calculated:}
 
 \textbf{(a) Construct a normal probability plot of these effects.}
 
-```{r}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 letter = c("A","B","C","D","AB","AC","AD","BC","BD","CD","ABC","ABD","ACD","BCD","ABCD")
 number = c(76.95,-67.52,-7.84,-18.73,-51.32,11.69,9.78,20.79,14.74,1.27,-2.82,-6.50,10.20,-7.98,-6.25)
 experiment = data.frame(letter, number)
@@ -331,10 +355,10 @@ experiment.aov = aov(number ~ coded(letter), experiment)
 
 plot = qqnorm(abs(number))
 ## click at the "outlier" points and then click "Finish" button
-
-
 lister = sort(abs(number))
+```
 
+```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 qqnorm(lister)
 abline(h = 76.95, col = "red")
 abline(h = 67.52, col = "purple")
@@ -383,7 +407,7 @@ error = data.frame(Standard.Order,Run.Order,A,B,C,D,UEC)
 \textbf{(a) Analyze the data from this experiment. Which factors
 significantly affect UEC?}
 
-```{r}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 error.lm = lm(UEC ~A*B*C*D, error)
 qqnorm(aov(UEC ~ A * B * C * D, error), label=T, full=T)
 coef=error.lm$coefficients[-1]
@@ -403,7 +427,7 @@ With the help of the normal probability plot we are able to identify that "A", "
 \textbf{(b) Analyze the residuals from this experiment. Are there
 any indications of model inadequacy?}
 
-```{r}
+```{r, out.width='.49\\linewidth', fig.width=3, fig.height=3}
 error.lm2 = lm(UEC~ A*C*D, error)
 res=error$UEC-fitted(error.lm2)
 library(car)
@@ -412,6 +436,8 @@ plot(fitted(error.lm2), res)
 ```
 
 After studying the normality and residuals we can state that normality is good and residuals are patternless and random. We may conclude that model is good.
+
+
 
 ##6.23
 
@@ -422,7 +448,7 @@ Reanalyze the experiment incorporating a test for curvature
 into the analysis. What conclusions can you draw? What
 recommendations would you make to the experimenters?}
 
-```{r}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # creating data table
 A = Laser.Power = c(1,1,1,-1,-1,-1,1,1,1,-1,-1,1,-1,-1,1,-1,0,0,0,0)
 B = Pulse.Freq = c(1,-1,1,-1,1,1,-1,-1,1,-1,-1,-1,-1,1,1,1,0,0,0,0)
@@ -446,17 +472,15 @@ summary(error.lm22)
 error.aov22 <- aov(UEC ~A*C + C*D + I(A^2) + I(B^2) + I(C^2) + I(D^2), error2)
 summary(error.aov22)
 
-# interaction plot
-with(error2, interaction.plot(A, C, UEC))
-with(error2, interaction.plot(C, D, UEC))
-
 # checking model adequacy
 res=error2$UEC-fitted(error.lm22)
 qqPlot(res)
 plot(fitted(error.lm22), res) 
 ```
 
-After testing for where or not our model should account for curvature, we do indeed find that squared terms are statistically significant in helping predict UEC, and should be included in the model.  We'd recommend excluding laser pulse frequency from the model.  Also, laswer power at 13W, matrix cell size at .07in., and writing speed at 10 in./sec is recommended to achieve the highest mean UEC.
+After testing for where or not our model should account for curvature, we do indeed find that squared terms are statistically significant in helping predict UEC, and should be included in the model.  We'd recommend excluding laser pulse frequency from the model.
+
+
 
 ##6.25
 
@@ -493,6 +517,8 @@ summary(chem.lm)
 
 Looking at our p-values from our linear model. We see that A, C, D, AC, and AD are all significanlty different and important. Take a look at our plot we notice the exact same results. There is no difference in our linear model and probability plot results.
 
+
+
 ##6.36
 
 \textbf{Resistivity on a silicon wafer is influenced by several
@@ -501,7 +527,7 @@ during a critical processing step is shown in Table P6.10.}
 
 \textbf{(a) Estimate the factor effects.  Plot the effect estimates on a normal probability plot and select a tentative model.}
 
-```{r}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # creating data table
 A <- rep(c("-", "+"), times = 8)
 B <- rep(c("-", "+"), each = 2, times = 4)
@@ -531,7 +557,7 @@ After plotting our ANOVA in a probability model we see that factor A, B, and int
 
 \textbf{(b) Fit the model identified in part (a) and analyze the residuals.  Is there any indication of model inadequacy.}
 
-```{r}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 wafer.lm2 <- lm((Resistivity) ~ coded(A) + coded(B) + coded(A) * coded(B), wafer.long)
 res=wafer.long$Resistivity-fitted(wafer.lm2)
 qqPlot(res)
@@ -542,7 +568,7 @@ After reviewing normality and residual plot we see that our normality plot is sl
 
 \textbf{(c) Repeat the analysis from parts (a) and (b) using ln(y) as the response variable.  Is there an indication that the transforation has been useful?}
 
-```{r}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 wafer.lm3 <- lm(log(Resistivity) ~ coded(A) * coded(B) * coded(C) + coded(A) * coded(B) * coded(D) + coded(A) * coded(C) * coded(D) + coded(B) * coded(C) * coded(D), wafer.long)
 
 qqnorm(aov(log(Resistivity) ~ coded(A) * coded(B)  * coded(C) + coded(A) * coded(B) * coded(D) + coded(A) * coded(C) * coded(D) + coded(B) * coded(C) * coded(D), wafer.long), label=T, full=T)
@@ -569,6 +595,8 @@ wafer.lm4 = lm(Resistivity ~ coded(A) + coded(B), wafer.long); summary(wafer.lm4
 
 After performing part (c) and checking model adequacy we can state that a model with factor A and factor B is a good model.
 
+
+
 ##6.37
 
 \textbf{Continuation of Problem 6.36. Suppose that the
@@ -578,7 +606,7 @@ points are 8.15, 7.63, 8.95, and 6.48. Analyze the experiment
 again incorporating the center points. What conclusions
 can you draw now?}
 
-```{r}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # creating data table
 A <- c(rep(c(-1, 1), times = 8), 0, 0, 0, 0)
 B <- c(rep(c(-1, 1), each = 2, times = 4), 0, 0, 0, 0)
