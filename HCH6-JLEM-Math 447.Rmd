@@ -8,7 +8,7 @@ output:
   word_document: default
 ---
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r,  warning=FALSE, message=FALSE}
 # loading libraries
 library(car)
 library(gplots)
@@ -47,7 +47,7 @@ cutting.speed.lm=lm(yield ~ coded(factorA) * coded(factorB) * coded(factorC), cu
 summary(cutting.speed.lm)
 ```
 
-```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # interaction plot
 with(cutting.speed.long, interaction.plot(factorA, factorC, yield))
 ```
@@ -70,12 +70,12 @@ The variables that we find statistically significant also match our results from
 \textbf{(c) Write down a regression model for predicting tool life
 (in hours) based on the results of this experiment.}
 
-$$y = \beta_0 + \beta_1 X_1 + \beta_2 + X_2 + \beta_3 + X_3 + \beta_{1,3} X_1 X_3$$
+$$y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \beta_{1,3} X_1 X_3$$
 
 
 \textbf{(d) Analyze the residuals. Are there any obvious problems?}
 
-```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 res=cutting.speed.long$yield-fitted(cutting.speed.lm)
 qqPlot(res)
 plot(fitted(cutting.speed.lm), res) 
@@ -155,7 +155,7 @@ Our linear regression reveals that both treatments are statistically significant
 and plot the residuals versus the predicted vibration
 level. Interpret these plots.}
 
-```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 router.aov = aov(Vibes ~ coded(A) * coded(B), router.long)
 qqnorm(router.aov, full=T)
 res=router.long$Vibes-fitted(router.lm)
@@ -169,7 +169,7 @@ Observing our plot we see that normality is on check and nothing unusual going o
 levels of bit size and speed would you recommend for
 routine operation?}
 
-```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # interaction plot
 with(router.long, interaction.plot(A, B, Vibes))
 ```
@@ -187,7 +187,7 @@ obtained the following response values: 36, 40, 43, 45.}
 
 \textbf{(a) Estimate the factor effects. Which effects are large?}
 
-```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # defining coded
 coded=function(x) #a function to code variable x
 {
@@ -239,14 +239,14 @@ $$y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \beta_{1,3} X_1 X_3$$
 
 \textbf{(d) Analyze the residuals.}
 
-```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 cutting.speed.lm3 = lm(yield ~ factorA + factorB + factorC + factorA*factorC, cutting.speed.small)
 res=cutting.speed.small$yield-fitted(cutting.speed.lm3)
 qqPlot(res)
 plot(fitted(cutting.speed.lm2), res) 
 ```
 
-There are patterns present, but this is due to the introduction of our 4 observations.
+There is no unusual activity going on in our residuals, normality seems good as well. This is a good model.
 
 \textbf{(e) What conclusions would you draw about the appropriate
 operating conditions for this process?}
@@ -264,7 +264,7 @@ the elevation of the heart rate (pulse) induced by the task. The
 results follow. Analyze the data and draw conclusions. Analyze
 the residuals and comment on the model's adequacy.}
 
-```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # creating data table
 type <- rep(c("Glass", "Plastic"), each = 4)
 worker <- rep(c("1", "2"), each = 8)
@@ -291,7 +291,7 @@ mse=summary(bottle.aov)[[1]][4,3]
 mse
 ```
 
-```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 # checking model adequacy
 res=bottle.long$pulse-fitted(bottle.lm)
 qqPlot(res)
@@ -356,9 +356,12 @@ experiment.aov = aov(number ~ coded(letter), experiment)
 plot = qqnorm(abs(number))
 ## click at the "outlier" points and then click "Finish" button
 lister = sort(abs(number))
+lister
 ```
 
-```{r,echo=FALSE,out.width='.49\\linewidth', fig.width=3, fig.height=3}
+The largest values are 51.32 as interaction effect factor A * factor B, 67.52 as factor B, and 76.95 as factor A.
+
+```{r,out.width='.49\\linewidth', fig.width=3, fig.height=3}
 qqnorm(lister)
 abline(h = 76.95, col = "red")
 abline(h = 67.52, col = "purple")
@@ -428,7 +431,7 @@ With the help of the normal probability plot we are able to identify that "A", "
 any indications of model inadequacy?}
 
 ```{r, out.width='.49\\linewidth', fig.width=3, fig.height=3}
-error.lm2 = lm(UEC~ A*C*D, error)
+error.lm2 = lm(UEC~ A+C+D, error)
 res=error$UEC-fitted(error.lm2)
 library(car)
 qqPlot(res)
@@ -478,7 +481,7 @@ qqPlot(res)
 plot(fitted(error.lm22), res) 
 ```
 
-After testing for where or not our model should account for curvature, we do indeed find that squared terms are statistically significant in helping predict UEC, and should be included in the model.  We'd recommend excluding laser pulse frequency from the model.
+After testing for where or not our model should account for curvature, we do indeed find that squared terms are statistically significant in helping predict UEC, and should be included in the model.  We'd recommend excluding laser pulse frequency from the model. Also the residuals and normality are good. This model is good.
 
 
 
@@ -564,7 +567,7 @@ qqPlot(res)
 plot(fitted(wafer.lm), res)
 ```
 
-After reviewing normality and residual plot we see that our normality plot is slightly off. As for our residual plot we notice there is some pattern going on. From the normality statement we can state that our model is not good.
+After reviewing normality and residual plot we see that our normality plot is off. As for our residual plot we notice there is some pattern going on. From the normality statement we can state that our model is not good.
 
 \textbf{(c) Repeat the analysis from parts (a) and (b) using ln(y) as the response variable.  Is there an indication that the transforation has been useful?}
 
@@ -585,7 +588,7 @@ qqPlot(res)
 plot(fitted(wafer.lm4), res)
 ```
 
-Based on the suggestion of the exercise. We do see an improvement in our model when it comes to checking our normality and residuals. Our model is good.
+Based on the suggestion of the exercise. We do see an improvement in our model when it comes to checking our normality and residuals. Our model is better.
 
 \textbf{(d) Fit a model in terms of the coded variables that can be used to predict the resistivity.}
 
@@ -645,4 +648,4 @@ qqPlot(res)
 plot(fitted(wafer.lm22), res) 
 ```
 
-With the introduction of center points to our dataset, we find that therer is statistically significant evidence of curvature in our model.  In addition, A, B, and AB are also statistically significant to our model.
+With the introduction of center points to our dataset, we find that therer is statistically significant evidence of curvature in our model.  In addition, A, B, and AB are also statistically significant to our model. Residual analysis tells us that our model is inadquate.
